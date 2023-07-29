@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.bg-dark-custom {
+    background-color: #2F3542;
+}
+
+.text-danger-custom {
+    color: #FF4757 !important;
+}
+
+.white {
+    color: white !important;
+}
+
+.btn-success-custom{
+    background-color: #2ED573 !important;
+    color: white !important;
+}
+
+.btn-success-custom:active {
+    opacity: .6;
+}
