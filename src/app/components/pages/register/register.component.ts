@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { IRequestRegister } from 'src/app/models/interfaces/user.interfaces';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private logger: LoggerService
   ) { }
 
   ngOnInit(): void {
@@ -72,10 +74,12 @@ export class RegisterComponent implements OnInit {
         password,
         user
       }
-      await this.userService.register(request) 
+      const response = await this.userService.register(request) 
+      this.logger.log(this.idLog, this.register.name, {info: 'Success', response})
       this.alertService.toast('Usuario registrado con éxito')
       this.clearForm()
     } catch (error: any) {
+      this.logger.error(this.idLog, this.register.name, {info: 'Error', error})
       let msg = error.error && error.error.message ? error.error.message : 'Problemas al registrar usuario, si el problema persiste contacte a administrador'
       this.alertService.alert(msg, 'error')
     } finally {
