@@ -21,17 +21,16 @@ export class LoggerService {
   }
 
   printLog(page: string = 'N/A', functionName: string = 'N/A', data: any = 'N/A', type: 'LOG' | 'WARNING' | 'ERROR') {
-    let data2: any
     if(environment.debbug){
       switch(type){
         case 'LOG':
-          console.log(`@@@@ Page[${page}] ---Func[${functionName}] -->[${data2}]`);
+          console.log('@@@@ Page[',page,'] ---Func[',functionName,'] -->[',data,']');
           break
         case 'WARNING':
-          console.warn(`@@@@ Page[${page}] ---Func[${functionName}] -->[${data2}]`);
+          console.warn('@@@@ Page[',page,'] ---Func[',functionName,'] -->[',data,']');
           break
         case 'ERROR':
-          console.error(`@@@@ Page[${page}] ---Func[${functionName}] -->[${data2}]`);
+          console.error('@@@@ Page[',page,'] ---Func[',functionName,'] -->[',data,']');
           break
       }
     }
