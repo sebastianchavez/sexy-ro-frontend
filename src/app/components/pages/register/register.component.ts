@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/helpers/must-match.validator';
+import { setErrorMessage } from 'src/app/helpers/utils';
 import { IRequestRegister } from 'src/app/models/interfaces/user.interfaces';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoggerService } from 'src/app/services/logger/logger.service';
@@ -80,7 +81,7 @@ export class RegisterComponent implements OnInit {
       this.clearForm()
     } catch (error: any) {
       this.logger.error(this.idLog, this.register.name, {info: 'Error', error})
-      let msg = error.error && error.error.message ? error.error.message : 'Problemas al registrar usuario, si el problema persiste contacte a administrador'
+      let msg = setErrorMessage(error)
       this.alertService.alert(msg, 'error')
     } finally {
       this.btnLoad = false

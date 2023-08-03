@@ -1,0 +1,72 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IRequestLogin } from 'src/app/models/interfaces/user.interfaces';
+import { AlertService } from 'src/app/services/alert/alert.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { setErrorMessage } from '../../../helpers/utils'
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+
+  idLog: string = 'LoginComponent'
+  loginForm: FormGroup = new FormGroup({})
+  submitted: boolean = false;
+  btnLoad: boolean = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private alertService: AlertService,
+    private logger: LoggerService
+  ) { }
+
+  ngOnInit(): void {
+    this.clearForm()
+  }
+
+  get f(){
+    return this.loginForm.controls
+  }
+
+  clearForm(){
+    this.submitted = false;
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['' ,[Validators.required, Validators.minLength(8)]],
+    })
+  }
+
+  async login(values: any){
+    this.submitted = true;
+
+    if(this.loginForm.invalid){
+      return
+    }
+
+    this.btnLoad = true
+    try {
+      const { email, password } = values
+      const request: IRequestLogin = {
+        email,
+        password,
+      }
+      const response = await this.userService.login(request) 
+      this.logger.log(this.idLog, this.login.name, {info: 'Success', response})
+      this.alertService.toast('Usuario autenticado')
+      this.clearForm()
+      localStorage.setItem('currentUser', JSON.stringify(response.data))
+    } catch (error: any) {
+      this.logger.error(this.idLog, this.login.name, {info: 'Error', error})
+      let msg = setErrorMessage(error)
+      this.alertService.alert(msg, 'error')
+    } finally {
+      this.btnLoad = false
+    }
+  }  
+
+}

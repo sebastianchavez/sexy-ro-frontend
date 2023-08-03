@@ -4,3 +4,8 @@ export interface IRequestRegister {
     email: string;
     genre: 'M' | 'F'
 }
+
+export interface IRequestLogin {
+    password: string;
+    email: string;
+}
