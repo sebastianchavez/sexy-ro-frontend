@@ -6,8 +6,24 @@
         </button>
       <div class="collapse navbar-collapse " id="navbarText">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-            <li *ngFor="let m of menu" class="nav-item">
-                <a class="nav-link white" [routerLink]="m.route">{{m.text}}</a>
+            <li *ngFor="let m of menu" class="nav-item" [ngClass]="{'dropdown': m.dropdown}">
+                <a *ngIf="!m.dropdown" class="nav-link white" [routerLink]="m.route">{{m.text}}</a>
+                <div *ngIf="m.dropdown">
+                    <div class="btn-group" dropdown>
+                        <button id="button-basic" dropdownToggle type="button" class="btn btn-dark-custom dropdown-toggle"
+                                aria-controls="dropdown-basic">
+                          {{m.text}} <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                            role="menu" aria-labelledby="button-basic">
+                          <li *ngFor="let d of m.dropdown" role="menuitem"><a class="dropdown-item" [routerLink]="d.route">{{d.text}}</a></li>
+                        </ul>
+                      </div>
+                </div>
+                <!-- <a *ngIf="m.dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{m.text}}</a>
+                <ul *ngIf="m.dropdown" class="dropdown-menu">
+                    <li *ngFor="let d of m.dropdown"><a class="dropdown-item" [routerLink]="d.route">{{d.text}}</a></li>
+                </ul> -->
             </li>
         </ul>
       </div>    

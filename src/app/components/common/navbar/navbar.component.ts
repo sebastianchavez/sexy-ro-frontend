@@ -10,6 +10,10 @@ export class NavbarComponent implements OnInit {
   menu: {
     route: string;
     text: string;
+    dropdown?: {
+      route: string;
+      text: string;
+    }[]
   }[] = [
     {
       route: '',
@@ -20,13 +24,19 @@ export class NavbarComponent implements OnInit {
       text: 'Descargas'
     },
     {
-      route: 'panel',
-      text: 'Panel'
+      route: '',
+      text: 'Panel',
+      dropdown: [
+        {
+          text: 'Mis cuentas',
+          route: 'panel/mis-cuentas'
+        }
+      ]
     },
     {
       route: 'usuario',
       text: 'Usuario'
-    }
+    },
   ]
   constructor() { }
 

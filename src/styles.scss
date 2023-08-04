@@ -5,6 +5,12 @@
     background-color: #2F3542;
 }
 
+.btn-dark-custom{
+    background-color: #2F3542;
+    color: white !important;
+    outline: none;
+}
+
 .text-danger-custom {
     color: #FF4757 !important;
 }
@@ -21,3 +27,9 @@
 .btn-success-custom:active {
     opacity: .6;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
