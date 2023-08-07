@@ -10,7 +10,7 @@
                 <a *ngIf="!m.dropdown" class="nav-link white" [routerLink]="m.route">{{m.text}}</a>
                 <div *ngIf="m.dropdown">
                     <div class="btn-group" dropdown>
-                        <button id="button-basic" dropdownToggle type="button" class="btn btn-dark-custom dropdown-toggle"
+                        <button id="button-basic" dropdownToggle type="button" class="btn btn-dark-custom"
                                 aria-controls="dropdown-basic">
                           {{m.text}} <span class="caret"></span>
                         </button>
@@ -20,10 +20,6 @@
                         </ul>
                       </div>
                 </div>
-                <!-- <a *ngIf="m.dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{m.text}}</a>
-                <ul *ngIf="m.dropdown" class="dropdown-menu">
-                    <li *ngFor="let d of m.dropdown"><a class="dropdown-item" [routerLink]="d.route">{{d.text}}</a></li>
-                </ul> -->
             </li>
         </ul>
       </div>    

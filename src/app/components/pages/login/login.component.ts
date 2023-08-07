@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IRequestLogin } from 'src/app/models/interfaces/user.interfaces';
+import { IRequestLoginUser } from 'src/app/models/interfaces/user.interfaces';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoggerService } from 'src/app/services/logger/logger.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { setErrorMessage } from '../../../helpers/utils'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alertService: AlertService,
-    private logger: LoggerService
+    private logger: LoggerService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.btnLoad = true
     try {
       const { email, password } = values
-      const request: IRequestLogin = {
+      const request: IRequestLoginUser = {
         email,
         password,
       }
@@ -60,6 +62,7 @@ export class LoginComponent implements OnInit {
       this.alertService.toast('Usuario autenticado')
       this.clearForm()
       localStorage.setItem('currentUser', JSON.stringify(response.data))
+      this.router.navigate(['/'])
     } catch (error: any) {
       this.logger.error(this.idLog, this.login.name, {info: 'Error', error})
       let msg = setErrorMessage(error)

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { setErrorMessage } from 'src/app/helpers/utils';
-import { IRequestRegister } from 'src/app/models/interfaces/user.interfaces';
+import { IRequestRegisterUser } from 'src/app/models/interfaces/user.interfaces';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoggerService } from 'src/app/services/logger/logger.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
     this.btnLoad = true
     try {
       const { email, genre, password, user } = values
-      const request: IRequestRegister = {
+      const request: IRequestRegisterUser = {
         email,
         genre,
         password,

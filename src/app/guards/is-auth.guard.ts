@@ -18,8 +18,7 @@ export class IsAuthGuard implements CanActivate {
     if(isAuth){
       return true
     } else {
-      localStorage.removeItem('currentUser')
-      this.router.navigate(['/'])
+      this.router.navigateByUrl('/login')
       return false
     }
   }

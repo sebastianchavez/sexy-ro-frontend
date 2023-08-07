@@ -16,7 +16,7 @@ export class InterceptorService {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = new HttpHeaders({
-      Authorization: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')!).accessToken : ''
+      Authorization: localStorage.getItem('currentUser') ? `Bearer ${JSON.parse(localStorage.getItem('currentUser')!).accessToken}` : ''
     })
 
     const reqClone = req.clone({
@@ -31,7 +31,7 @@ export class InterceptorService {
           this.router.navigate(['/login'])
           return throwError(error)
         } else {
-          return throwError(error.message)
+          return throwError(error)
         }
       }));
   }
