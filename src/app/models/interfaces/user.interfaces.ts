@@ -11,6 +11,7 @@ export interface IRequestLoginUser {
 }
 
 export interface IAccount {
+    account_id: number;
     userid: string;
     sex: 'F' | 'M';
     email: string;
@@ -42,4 +43,10 @@ export interface IRequestRegisterAccount {
     user_pass: string;
     sex: string;
     last_ip: string;
+}
+
+export interface IRequestUpdateAccount {
+    account_id: number;
+    password: string;
+    genre: string;
 }

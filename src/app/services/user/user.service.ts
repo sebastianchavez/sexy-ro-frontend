@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { IRequestLoginUser, IRequestRegisterAccount, IRequestRegisterUser } from 'src/app/models/interfaces/user.interfaces';
+import { IRequestLoginUser, IRequestRegisterAccount, IRequestRegisterUser, IRequestUpdateAccount } from 'src/app/models/interfaces/user.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class UserService {
   private url2: string = 'api/users/login'
   private url3: string = 'api/users/get-accounts'
   private url4: string = 'api/users/register-account'
+  private url5: string = 'api/users/update-account'
 
   constructor(
     private http: HttpClient,
@@ -32,6 +33,10 @@ export class UserService {
   }
 
   registerAccount(request: IRequestRegisterAccount): Promise<any> {
-    return firstValueFrom(this.http.post(`${this.apiUrl}${this.url4}`,request))
+    return firstValueFrom(this.http.post(`${this.apiUrl}${this.url4}`, request))
+  }
+
+  updateAccount(request: IRequestUpdateAccount): Promise<any> {
+    return firstValueFrom(this.http.put(`${this.apiUrl}${this.url5}`, request))
   }
 }

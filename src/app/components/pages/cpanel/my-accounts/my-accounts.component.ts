@@ -4,7 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { setErrorMessage } from 'src/app/helpers/utils';
-import { IAccount, IRequestRegisterAccount } from 'src/app/models/interfaces/user.interfaces';
+import { IAccount, IRequestRegisterAccount, IRequestUpdateAccount } from 'src/app/models/interfaces/user.interfaces';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoggerService } from 'src/app/services/logger/logger.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -40,6 +40,7 @@ export class MyAccountsComponent implements OnInit {
   page: number = 1;
   limit: number = 10;
   totalAccounts: number = 0
+  selectedAccount?: IAccount
   
   constructor(
     private logger: LoggerService,
@@ -72,6 +73,7 @@ export class MyAccountsComponent implements OnInit {
   openModal(template: TemplateRef<any>, data?: IAccount) {
     this.submitted = false;
     this.isNew = data ? false : true
+    this.selectedAccount = data;
     this.setAccountForm(data)
     this.modalRef = this.modalService.show(template);
   }
@@ -110,15 +112,25 @@ export class MyAccountsComponent implements OnInit {
     this.btnLoad = true
     try {
       const { genre, password, user } = values
-      const request: IRequestRegisterAccount = {
-        userid: user,
-        sex: genre,
-        user_pass: password,
-        last_ip: '127.0.0.1'
+      if(this.isNew){
+        const request: IRequestRegisterAccount = {
+          userid: user,
+          sex: genre,
+          user_pass: password,
+          last_ip: '127.0.0.1'
+        }
+        const response = await this.userService.registerAccount(request) 
+        this.logger.log(this.idLog, this.register.name, {info: 'Register account - Success', response})
+      } else {
+        const request: IRequestUpdateAccount = {
+          account_id: this.selectedAccount!.account_id,
+          genre,
+          password
+        }
+        const response = await this.userService.updateAccount(request) 
+        this.logger.log(this.idLog, this.register.name, {info: 'Update account - Success', response})
       }
-      const response = await this.userService.registerAccount(request) 
-      this.logger.log(this.idLog, this.register.name, {info: 'Success', response})
-      this.alertService.toast('Usuario registrado con éxito')
+      this.alertService.toast(`Usuario ${this.isNew ? 'registrado' : 'actualizado'} con éxito`)
       this.setAccountForm()
       this.modalRef?.hide()
       this.getAccounts()
