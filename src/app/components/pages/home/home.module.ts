@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { HeaderModule } from '../../common/header/header.module';
+import { EventsModule } from '../../common/events/events.module';
+import { VotesModule } from '../../common/votes/votes.module';
 
 
 @NgModule({
@@ -11,6 +14,9 @@ import { HomeComponent } from './home.component';
   ],
   imports: [
     CommonModule,
+    HeaderModule,
+    EventsModule,
+    VotesModule,
     HomeRoutingModule
   ]
 })

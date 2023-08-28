@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  headers: string[] = [
+    'assets/imgs/header01.jpg',
+    'assets/imgs/header02.jpg',
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   debbug: true,
-  apiUrl: 'http://localhost:3000/'
+  apiUrl: 'http://localhost:3000/',
+  idServer: 1
 };
 
 /*
