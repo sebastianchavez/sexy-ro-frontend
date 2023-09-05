@@ -11,6 +11,10 @@ const routes: Routes = [
       {
         path: 'mis-cuentas',
         loadChildren: () => import('./my-accounts/my-accounts.module').then(m => m.MyAccountsModule)
+      },
+      {
+        path: 'pvp-ranking',
+        loadChildren: () => import('./pvp-ranking/pvp-ranking.module').then(m => m.PvpRankingModule)
       }
     ]
   }

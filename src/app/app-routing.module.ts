@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'panel',
     loadChildren: () => import('./components/pages/cpanel/cpanel.module').then(m => m.CpanelModule),
     canActivate: [IsAuthGuard]
+  },
+  {
+    path: 'descargas',
+    loadChildren: () => import('./components/pages/downloads/downloads.module').then(m => m.DownloadsModule)
+  },
+  {
+    path: '*',
+    redirectTo: ''
   }
 ];
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CpanelRoutingModule } from './cpanel-routing.module';
 import { CpanelComponent } from './cpanel.component';
+import { PvpRankingComponent } from './pvp-ranking/pvp-ranking.component';
 
 
 @NgModule({

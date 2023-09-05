@@ -30,6 +30,10 @@ export class NavbarComponent implements OnInit {
         {
           text: 'Mis cuentas',
           route: 'panel/mis-cuentas'
+        },
+        {
+          text: 'Ranking PVP',
+          route: 'panel/pvp-ranking'
         }
       ]
     },
